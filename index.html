@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GC Perfil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e6ebee;--ink:#16202a;--mut:#5b6872;--line:#cdd5da;--card:#fff;--ok:#0b6e5c;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Sans",system-ui,sans-serif}
+.top{padding:22px clamp(16px,4vw,40px) 6px}
+.top h1{margin:0;font:700 clamp(24px,4vw,34px)/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em}
+.top p{margin:6px 0 0;color:var(--mut);max-width:60ch}
+.app{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:20px;padding:16px clamp(16px,4vw,40px) 40px;align-items:start}
+#f{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}
+#f h2{font:700 17px "Bricolage Grotesque",sans-serif;margin:22px 0 8px}
+#f h2:first-child{margin-top:0}
+label{display:block;font-size:13px;color:var(--mut);margin:0 0 10px}
+input,textarea,select{display:block;width:100%;margin-top:3px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font:inherit;color:var(--ink);background:#fff}
+textarea{resize:vertical;min-height:70px}
+:focus-visible{outline:3px solid #0b6e5c;outline-offset:1px}
+fieldset{border:1px solid var(--line);border-radius:8px;margin:0 0 10px;padding:10px}
+button{font:500 14px "IBM Plex Sans",sans-serif;padding:8px 14px;border-radius:6px;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}
+button:hover{background:#f0f3f5}
+.pri{background:var(--ok);border-color:var(--ok);color:#fff}.pri:hover{background:#09584a}
+.rm{border-color:var(--line);color:#a02c2c;font-size:13px;padding:4px 10px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:12px}
+.bar label{margin:0;flex:1 1 140px}.bar input[type=color]{padding:2px;height:36px}
+.pv{overflow:auto;padding:16px;background:#cfd7dc;border-radius:10px}
+#cv{width:210mm;min-height:297mm;margin:0 auto;background:#fff;color:#1b232b;box-shadow:0 2px 14px rgba(0,0,0,.18);--ac:#0b6e5c;font:13px/1.45 "IBM Plex Sans",sans-serif}
+#cv h1{margin:0;font-size:30px;line-height:1.1}
+#cv h3{margin:18px 0 6px;font-size:13px;color:var(--ac);border-bottom:1.5px solid var(--ac);padding-bottom:3px}
+#cv .cargo{font-size:15px;margin-top:3px}
+#cv .r{display:flex;justify-content:space-between;gap:10px}#cv .r span{color:#5b6872;white-space:nowrap}
+#cv .it{margin-bottom:9px}#cv .s{color:#3d4a55}
+#cv ul{margin:3px 0 0;padding-left:18px}
+#cv .ch{display:flex;flex-wrap:wrap;gap:5px}#cv .ch span{border:1px solid var(--ac);border-radius:99px;padding:1px 9px;font-size:12px}
+#cv .ct{color:#3d4a55}
+.t-classico{padding:16mm 18mm;font-family:"Source Serif 4",Georgia,serif!important;font-size:13.5px!important}
+.t-classico header{text-align:center;margin-bottom:6px}.t-classico .ct{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 14px;margin-top:8px}
+.t-classico h3{text-align:center;border-bottom:1px solid #1b232b;color:#1b232b}
+.t-moderno{display:grid;grid-template-columns:34% 1fr}
+.t-moderno aside{background:var(--ac);color:#fff;padding:16mm 8mm}.t-moderno aside h3{color:#fff;border-color:rgba(255,255,255,.5)}
+.t-moderno aside .ct{color:#fff;margin-bottom:5px;word-break:break-word}.t-moderno aside .ch span{border-color:#fff}
+.t-moderno main{padding:16mm 12mm}
+.t-compacto{padding:12mm 14mm;font-size:12px!important}.t-compacto header{border-left:5px solid var(--ac);padding-left:10px}
+.t-compacto .ct{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:4px}.t-compacto h3{margin-top:12px}
+@media(max-width:900px){.app{grid-template-columns:1fr}#f{position:static;max-height:none}}
+@media print{@page{size:A4;margin:0}body{background:#fff}.top,#f,.bar{display:none!important}.app{display:block;padding:0}.pv{padding:0;background:none;overflow:visible}#cv{zoom:1!important;box-shadow:none;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>GC Perfil</h1>
+  <p>Um gerador de curriculo profissional, crie seu próprio perfil.</p>
+</header>
+<div class="app">
+  <form id="f" onsubmit="return false" aria-label="Dados do currículo"></form>
+  <section>
+    <div class="bar">
+      <label>Modelo
+        <select id="tpl"><option value="classico">Clássico</option><option value="moderno">Moderno</option><option value="compacto">Compacto</option></select>
+      </label>
+      <label>Cor de destaque<input type="color" id="cor"></label>
+      <button type="button" class="pri" id="pdf">Baixar PDF</button>
+      <button type="button" id="clr">Limpar tudo</button>
+    </div>
+    <div class="pv"><div id="cv"></div></div>
+  </section>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const SAMPLE={nome:"João Guilhermme",cargo:"Desenvolvedor Web Júnior",email:"joao@email.com",tel:"(88) 99999-0000",cidade:"Fortaleza, CE",link:"github.com/joao",
+resumo:"Estudante de Análise e Desenvolvimento de Sistemas, com projetos em HTML, CSS, JavaScript e PHP. Busco a primeira oportunidade na área de TI para aprender em equipe e entregar sistemas úteis.",
+exp:[{cargo:"Auxiliar administrativa",empresa:"Loja Exemplo",periodo:"2024 – atual",desc:"Controle de estoque e atendimento ao cliente\nOrganização de planilhas de vendas"}],
+edu:[{curso:"Tecnólogo em Análise e Desenvolvimento de Sistemas",inst:"UNINASSAU",periodo:"2024 – 2026"}],
+skills:"HTML, CSS, JavaScript, PHP, MySQL, Git, Excel",idiomas:"Português (nativo), Inglês (básico)",tpl:"classico",cor:"#0b6e5c"};
+let S;
+try{S=JSON.parse(localStorage.getItem("cv-gerador"))}catch(e){}
+if(!S||!Array.isArray(S.exp))S=structuredClone(SAMPLE);
+const save=()=>{try{localStorage.setItem("cv-gerador",JSON.stringify(S))}catch(e){}};
+const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+const inp=(k,l,ph="")=>`<label>${l}<input data-k="${k}" value="${esc(S[k])}" placeholder="${ph}"></label>`;
+const area=(k,l)=>`<label>${l}<textarea data-k="${k}">${esc(S[k])}</textarea></label>`;
+const sub=(l,i,f,t,v,ph)=>`<label>${t}<input data-f="${f}" value="${esc(v)}" placeholder="${ph||""}"></label>`;
+function renderForm(){
+ $("#f").innerHTML=`<h2>Dados pessoais</h2>${inp("nome","Nome completo")}${inp("cargo","Cargo ou objetivo","Ex.: Desenvolvedor Web Júnior")}${inp("email","E-mail")}${inp("tel","Telefone")}${inp("cidade","Cidade e estado")}${inp("link","Link (GitHub, LinkedIn ou portfólio)")}
+ <h2>Resumo</h2>${area("resumo","Fale de você em 2 ou 3 frases")}
+ <h2>Experiência</h2>${S.exp.map((e,i)=>`<fieldset data-l="exp" data-i="${i}">${sub("exp",i,"cargo","Cargo",e.cargo)}${sub("exp",i,"empresa","Empresa",e.empresa)}${sub("exp",i,"periodo","Período",e.periodo,"Ex.: 2023 – 2024")}<label>O que você fez (uma linha por item)<textarea data-f="desc">${esc(e.desc)}</textarea></label><button type="button" class="rm" data-rm="exp:${i}">Remover</button></fieldset>`).join("")}<button type="button" data-add="exp">Adicionar experiência</button>
+ <h2>Formação</h2>${S.edu.map((e,i)=>`<fieldset data-l="edu" data-i="${i}">${sub("edu",i,"curso","Curso",e.curso)}${sub("edu",i,"inst","Instituição",e.inst)}${sub("edu",i,"periodo","Período",e.periodo)}<button type="button" class="rm" data-rm="edu:${i}">Remover</button></fieldset>`).join("")}<button type="button" data-add="edu">Adicionar formação</button>
+ <h2>Habilidades e idiomas</h2>${inp("skills","Habilidades (separe por vírgula)")}${inp("idiomas","Idiomas (separe por vírgula)")}`;
+}
+const ul=t=>{const l=String(t||"").split("\n").map(x=>x.trim()).filter(Boolean);return l.length?`<ul>${l.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""};
+const chips=t=>{const l=String(t||"").split(",").map(x=>x.trim()).filter(Boolean);return l.length?`<div class="ch">${l.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""};
+const sec=(t,b)=>b?`<section><h3>${t}</h3>${b}</section>`:"";
+function draw(){
+ const cv=$("#cv"),ct=[S.email,S.tel,S.cidade,S.link].filter(Boolean).map(x=>`<div class="ct">${esc(x)}</div>`);
+ const exp=S.exp.filter(e=>e.cargo||e.empresa).map(e=>`<div class="it"><div class="r"><b>${esc(e.cargo)}</b><span>${esc(e.periodo)}</span></div><div class="s">${esc(e.empresa)}</div>${ul(e.desc)}</div>`).join("");
+ const edu=S.edu.filter(e=>e.curso||e.inst).map(e=>`<div class="it"><div class="r"><b>${esc(e.curso)}</b><span>${esc(e.periodo)}</span></div><div class="s">${esc(e.inst)}</div></div>`).join("");
+ const head=`<header><h1>${esc(S.nome)||"Seu nome"}</h1><div class="cargo">${esc(S.cargo)}</div>${S.tpl==="moderno"?"":ct.join("")}</header>`;
+ const resumo=S.resumo?sec("Resumo",`<p style="margin:0">${esc(S.resumo)}</p>`):"";
+ const body=resumo+sec("Experiência",exp)+sec("Formação",edu);
+ cv.className="t-"+S.tpl;cv.style.setProperty("--ac",S.cor);
+ cv.innerHTML=S.tpl==="moderno"
+  ?`<aside>${sec("Contato",ct.join(""))}${sec("Habilidades",chips(S.skills))}${sec("Idiomas",chips(S.idiomas))}</aside><main>${head}${body}</main>`
+  :`${head}${body}${sec("Habilidades",chips(S.skills))}${sec("Idiomas",chips(S.idiomas))}`;
+ fit();
+}
+function fit(){const w=$(".pv").clientWidth-32;$("#cv").style.zoom=Math.min(1,w/794)}
+
+$("#f").addEventListener("input",e=>{
+ const t=e.target;
+ if(t.dataset.k)S[t.dataset.k]=t.value;
+ else if(t.dataset.f){const fs=t.closest("fieldset");S[fs.dataset.l][fs.dataset.i][t.dataset.f]=t.value}
+ save();draw();
+});
+$("#f").addEventListener("click",e=>{
+ const a=e.target.dataset.add,r=e.target.dataset.rm;
+ if(a){S[a].push(a==="exp"?{cargo:"",empresa:"",periodo:"",desc:""}:{curso:"",inst:"",periodo:""})}
+ else if(r){const[l,i]=r.split(":");S[l].splice(+i,1)}
+ else return;
+ save();renderForm();draw();
+});
+$("#tpl").onchange=e=>{S.tpl=e.target.value;save();draw()};
+$("#cor").oninput=e=>{S.cor=e.target.value;save();draw()};
+$("#pdf").onclick=()=>window.print();
+$("#clr").onclick=()=>{
+ if(!confirm("Apagar todos os dados do currículo?"))return;
+ S={nome:"",cargo:"",email:"",tel:"",cidade:"",link:"",resumo:"",exp:[{cargo:"",empresa:"",periodo:"",desc:""}],edu:[{curso:"",inst:"",periodo:""}],skills:"",idiomas:"",tpl:S.tpl,cor:S.cor};
+ save();renderForm();draw();
+};
+window.addEventListener("resize",fit);
+$("#tpl").value=S.tpl;$("#cor").value=S.cor;
+renderForm();draw();
+</script>
+</body>
+</html>
