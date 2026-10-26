@@ -6,7 +6,7 @@
 <title>GC Perfil</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#e6ebee;--ink:#16202a;--mut:#5b6872;--line:#cdd5da;--card:#fff;--ok:#0b6e5c;box-sizing:border-box}
 *,*::before,*::after{box-sizing:inherit}
@@ -30,24 +30,72 @@ button:hover{background:#f0f3f5}
 .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:12px}
 .bar label{margin:0;flex:1 1 140px}.bar input[type=color]{padding:2px;height:36px}
 .pv{overflow:auto;padding:16px;background:#cfd7dc;border-radius:10px}
-#cv{width:210mm;min-height:297mm;margin:0 auto;background:#fff;color:#1b232b;box-shadow:0 2px 14px rgba(0,0,0,.18);--ac:#0b6e5c;font:13px/1.45 "IBM Plex Sans",sans-serif}
-#cv h1{margin:0;font-size:30px;line-height:1.1}
-#cv h3{margin:18px 0 6px;font-size:13px;color:var(--ac);border-bottom:1.5px solid var(--ac);padding-bottom:3px}
-#cv .cargo{font-size:15px;margin-top:3px}
-#cv .r{display:flex;justify-content:space-between;gap:10px}#cv .r span{color:#5b6872;white-space:nowrap}
-#cv .it{margin-bottom:9px}#cv .s{color:#3d4a55}
-#cv ul{margin:3px 0 0;padding-left:18px}
-#cv .ch{display:flex;flex-wrap:wrap;gap:5px}#cv .ch span{border:1px solid var(--ac);border-radius:99px;padding:1px 9px;font-size:12px}
-#cv .ct{color:#3d4a55}
-.t-classico{padding:16mm 18mm;font-family:"Source Serif 4",Georgia,serif!important;font-size:13.5px!important}
-.t-classico header{text-align:center;margin-bottom:6px}.t-classico .ct{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 14px;margin-top:8px}
-.t-classico h3{text-align:center;border-bottom:1px solid #1b232b;color:#1b232b}
-.t-moderno{display:grid;grid-template-columns:34% 1fr}
-.t-moderno aside{background:var(--ac);color:#fff;padding:16mm 8mm}.t-moderno aside h3{color:#fff;border-color:rgba(255,255,255,.5)}
-.t-moderno aside .ct{color:#fff;margin-bottom:5px;word-break:break-word}.t-moderno aside .ch span{border-color:#fff}
-.t-moderno main{padding:16mm 12mm}
-.t-compacto{padding:12mm 14mm;font-size:12px!important}.t-compacto header{border-left:5px solid var(--ac);padding-left:10px}
-.t-compacto .ct{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:4px}.t-compacto h3{margin-top:12px}
+
+/* ===== Currículo: base ===== */
+#cv{width:210mm;min-height:297mm;margin:0 auto;background:#fff;color:#1b232b;box-shadow:0 2px 14px rgba(0,0,0,.18);--ac:#0b6e5c;--soft:color-mix(in srgb,var(--ac) 10%,#fff);font:13px/1.5 "IBM Plex Sans",sans-serif;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+#cv h1{margin:0;font:700 32px/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.01em}
+#cv h3{display:flex;align-items:center;gap:10px;margin:18px 0 8px;font:700 14px "Bricolage Grotesque",sans-serif;color:var(--ac);break-after:avoid}
+#cv h3::after{content:"";flex:1;height:1px;background:#cdd5da}
+#cv p{margin:0}
+#cv .cargo{font-size:15px;margin-top:5px;color:#3d4a55}
+#cv .cts{display:flex;flex-wrap:wrap;gap:3px 0;margin-top:10px}
+#cv header .ct+.ct{border-left:1px solid #b8c0c6;margin-left:12px;padding-left:12px}
+#cv .ct{color:#3d4a55;word-break:break-word}
+#cv .it{margin-bottom:11px;break-inside:avoid}
+#cv .r{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+#cv .r b{font-weight:600}
+#cv .r span{color:#5b6872;font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}
+#cv .s{color:var(--ac);font-weight:500}
+#cv ul{margin:4px 0 0;padding-left:17px}#cv li{margin-bottom:2px}#cv li::marker{color:var(--ac)}
+#cv .ch{display:flex;flex-wrap:wrap;gap:5px}
+#cv .ch span{background:var(--soft);border-radius:4px;padding:2px 9px;font-size:12px;font-weight:500}
+#cv section{break-inside:auto}
+
+/* ===== Clássico ===== */
+#cv.t-classico{padding:18mm 20mm;font-family:"Source Serif 4",Georgia,serif;font-size:13.5px;line-height:1.55}
+#cv.t-classico h1{font-family:"Source Serif 4",Georgia,serif;font-size:34px;letter-spacing:.01em}
+#cv.t-classico header{text-align:center;padding-bottom:14px;border-bottom:3px double var(--ac)}
+#cv.t-classico .cargo{font-style:italic;color:var(--ac)}
+#cv.t-classico .cts{justify-content:center}
+#cv.t-classico h3{font-family:"Source Serif 4",Georgia,serif;font-size:15px;color:#1b232b}
+#cv.t-classico h3::after{background:var(--ac);opacity:.5}
+#cv.t-classico .ch span{background:none;border:1px solid #b8c0c6;border-radius:99px}
+#cv.t-classico .s{font-style:italic;font-weight:400}
+
+/* ===== Moderno (barra lateral) ===== */
+#cv.t-moderno{display:grid;grid-template-columns:34% 1fr}
+#cv.t-moderno aside{background:var(--ac);color:#fff;padding:16mm 8mm}
+#cv.t-moderno .mono{width:24mm;height:24mm;border-radius:50%;border:2px solid rgba(255,255,255,.7);display:grid;place-items:center;font:700 26px "Bricolage Grotesque",sans-serif;margin:0 auto 6mm}
+#cv.t-moderno aside h3{color:#fff;font-size:13px}
+#cv.t-moderno aside h3::after{background:rgba(255,255,255,.4)}
+#cv.t-moderno aside .cts{display:block;margin:0}
+#cv.t-moderno aside .ct{color:#fff;margin-bottom:6px}
+#cv.t-moderno aside .ch span{background:rgba(255,255,255,.18);color:#fff}
+#cv.t-moderno main{padding:18mm 13mm 16mm}
+#cv.t-moderno main h1{font-size:34px}
+#cv.t-moderno main h3{border-left:4px solid var(--ac);padding-left:9px;font-size:15px}
+#cv.t-moderno main h3::after{display:none}
+#cv.t-moderno main .cargo{color:var(--ac);font-weight:500;margin-bottom:4mm}
+
+/* ===== Compacto (duas colunas) ===== */
+#cv.t-compacto{padding:13mm 14mm;font-size:12px}
+#cv.t-compacto header{border-left:5px solid var(--ac);padding-left:12px;margin-bottom:4mm}
+#cv.t-compacto h1{font-size:28px}
+#cv.t-compacto .cols{display:grid;grid-template-columns:1fr 58mm;gap:8mm}
+#cv.t-compacto .side{background:var(--soft);border-radius:6px;padding:2mm 5mm 5mm;align-self:start}
+#cv.t-compacto .side h3::after{background:var(--ac);opacity:.35}
+#cv.t-compacto h3{margin-top:12px;font-size:13px}
+
+/* ===== Faixa (cabeçalho em destaque + linha do tempo) ===== */
+#cv.t-faixa header{background:var(--ac);color:#fff;padding:15mm 18mm 11mm}
+#cv.t-faixa .cargo,#cv.t-faixa .ct{color:#fff}
+#cv.t-faixa .cargo{opacity:.92}
+#cv.t-faixa header .ct+.ct{border-color:rgba(255,255,255,.45)}
+#cv.t-faixa .bd{padding:3mm 18mm 14mm}
+#cv.t-faixa .it{position:relative;border-left:2px solid color-mix(in srgb,var(--ac) 30%,#fff);padding-left:15px;margin-left:4px}
+#cv.t-faixa .it::before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--ac);border:2px solid #fff}
+#cv.t-faixa .two{display:grid;grid-template-columns:1fr 1fr;gap:0 10mm}
+
 @media(max-width:900px){.app{grid-template-columns:1fr}#f{position:static;max-height:none}}
 @media print{@page{size:A4;margin:0}body{background:#fff}.top,#f,.bar{display:none!important}.app{display:block;padding:0}.pv{padding:0;background:none;overflow:visible}#cv{zoom:1!important;box-shadow:none;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
@@ -55,14 +103,14 @@ button:hover{background:#f0f3f5}
 <body>
 <header class="top">
   <h1>GC Perfil</h1>
-  <p>Um gerador de curriculo profissional, crie seu próprio perfil.</p>
+  <p>Um gerador de currículo profissional, crie seu próprio perfil.</p>
 </header>
 <div class="app">
   <form id="f" onsubmit="return false" aria-label="Dados do currículo"></form>
   <section>
     <div class="bar">
       <label>Modelo
-        <select id="tpl"><option value="classico">Clássico</option><option value="moderno">Moderno</option><option value="compacto">Compacto</option></select>
+        <select id="tpl"><option value="classico">Clássico</option><option value="moderno">Moderno</option><option value="compacto">Compacto</option><option value="faixa">Faixa</option></select>
       </label>
       <label>Cor de destaque<input type="color" id="cor"></label>
       <button type="button" class="pri" id="pdf">Baixar PDF</button>
@@ -98,16 +146,20 @@ const ul=t=>{const l=String(t||"").split("\n").map(x=>x.trim()).filter(Boolean);
 const chips=t=>{const l=String(t||"").split(",").map(x=>x.trim()).filter(Boolean);return l.length?`<div class="ch">${l.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""};
 const sec=(t,b)=>b?`<section><h3>${t}</h3>${b}</section>`:"";
 function draw(){
- const cv=$("#cv"),ct=[S.email,S.tel,S.cidade,S.link].filter(Boolean).map(x=>`<div class="ct">${esc(x)}</div>`);
+ const cv=$("#cv"),T=S.tpl;
+ const ct=[S.email,S.tel,S.cidade,S.link].filter(Boolean).map(x=>`<div class="ct">${esc(x)}</div>`).join("");
  const exp=S.exp.filter(e=>e.cargo||e.empresa).map(e=>`<div class="it"><div class="r"><b>${esc(e.cargo)}</b><span>${esc(e.periodo)}</span></div><div class="s">${esc(e.empresa)}</div>${ul(e.desc)}</div>`).join("");
  const edu=S.edu.filter(e=>e.curso||e.inst).map(e=>`<div class="it"><div class="r"><b>${esc(e.curso)}</b><span>${esc(e.periodo)}</span></div><div class="s">${esc(e.inst)}</div></div>`).join("");
- const head=`<header><h1>${esc(S.nome)||"Seu nome"}</h1><div class="cargo">${esc(S.cargo)}</div>${S.tpl==="moderno"?"":ct.join("")}</header>`;
- const resumo=S.resumo?sec("Resumo",`<p style="margin:0">${esc(S.resumo)}</p>`):"";
- const body=resumo+sec("Experiência",exp)+sec("Formação",edu);
- cv.className="t-"+S.tpl;cv.style.setProperty("--ac",S.cor);
- cv.innerHTML=S.tpl==="moderno"
-  ?`<aside>${sec("Contato",ct.join(""))}${sec("Habilidades",chips(S.skills))}${sec("Idiomas",chips(S.idiomas))}</aside><main>${head}${body}</main>`
-  :`${head}${body}${sec("Habilidades",chips(S.skills))}${sec("Idiomas",chips(S.idiomas))}`;
+ const pn=(S.nome||"").trim().split(/\s+/).filter(Boolean);
+ const mono=pn.length?(pn[0][0]+(pn.length>1?pn[pn.length-1][0]:"")).toUpperCase():"?";
+ const head=c=>`<header><h1>${esc(S.nome)||"Seu nome"}</h1><div class="cargo">${esc(S.cargo)}</div>${c&&ct?`<div class="cts">${ct}</div>`:""}</header>`;
+ const resumo=S.resumo?sec("Resumo",`<p>${esc(S.resumo)}</p>`):"";
+ const ex=sec("Experiência",exp),ed=sec("Formação",edu),sk=sec("Habilidades",chips(S.skills)),id=sec("Idiomas",chips(S.idiomas));
+ cv.className="t-"+T;cv.style.setProperty("--ac",S.cor);
+ if(T==="moderno")cv.innerHTML=`<aside><div class="mono">${esc(mono)}</div>${ct?sec("Contato",`<div class="cts">${ct}</div>`):""}${sk}${id}</aside><main>${head(0)}${resumo}${ex}${ed}</main>`;
+ else if(T==="compacto")cv.innerHTML=`${head(1)}<div class="cols"><div>${resumo}${ex}</div><div class="side">${ed}${sk}${id}</div></div>`;
+ else if(T==="faixa")cv.innerHTML=`${head(1)}<div class="bd">${resumo}${ex}${ed}<div class="two">${sk}${id}</div></div>`;
+ else cv.innerHTML=`${head(1)}${resumo}${ex}${ed}${sk}${id}`;
  fit();
 }
 function fit(){const w=$(".pv").clientWidth-32;$("#cv").style.zoom=Math.min(1,w/794)}
