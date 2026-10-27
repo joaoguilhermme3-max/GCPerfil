@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1f3a">
 <title>GC Perfil | Gerador de currículo</title>
 <meta name="description" content="Gerador de currículo profissional: preencha, escolha um modelo e baixe em PDF.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,13 +12,15 @@
 <style>
 :root{--navy:#0b1f3a;--navy2:#14325c;--bg:#eef1f6;--ink:#0f1b2d;--mut:#5a6779;--line:#d6dce6;--card:#fff;--ring:#3b82f6;box-sizing:border-box}
 *,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Sans",system-ui,sans-serif}
 [hidden]{display:none!important}
 :focus-visible{outline:3px solid var(--ring);outline-offset:2px}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 
 /* ===== Aplicativo ===== */
-.nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:14px clamp(16px,4vw,40px);background:linear-gradient(120deg,var(--navy),var(--navy2));color:#fff}
-.logo{width:40px;height:40px;border-radius:11px;background:#fff;color:var(--navy);display:grid;place-items:center;font:700 16px "Bricolage Grotesque",sans-serif}
+.nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:14px clamp(16px,4vw,40px);padding-top:calc(14px + env(safe-area-inset-top,0px));background:linear-gradient(120deg,var(--navy),var(--navy2));color:#fff}
+.logo{width:40px;height:40px;flex:none;border-radius:11px;background:#fff;color:var(--navy);display:grid;place-items:center;font:700 16px "Bricolage Grotesque",sans-serif}
 .brand h1{margin:0;font:700 20px/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.01em}
 .brand p{margin:3px 0 0;font-size:13px;color:#b9c7dd}
 .nav .act{margin-left:auto;display:flex;gap:8px}
@@ -26,13 +29,13 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Sans
 #f{display:grid;gap:14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 1px 2px rgba(11,31,58,.04)}
 .card h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font:700 16px "Bricolage Grotesque",sans-serif}
-.n{width:24px;height:24px;border-radius:50%;background:var(--navy2);color:#fff;font:600 12px "IBM Plex Sans",sans-serif;display:grid;place-items:center}
+.n{width:24px;height:24px;flex:none;border-radius:50%;background:var(--navy2);color:#fff;font:600 12px "IBM Plex Sans",sans-serif;display:grid;place-items:center}
 label{display:block;font-size:13px;color:var(--mut);margin:0 0 10px}
 input,textarea{display:block;width:100%;margin-top:4px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;color:var(--ink);background:#fff}
 input:focus,textarea:focus{border-color:var(--navy2)}
 input[type=color]{padding:2px;height:30px;width:42px;margin:0;border-radius:8px}
 textarea{resize:vertical;min-height:72px}
-fieldset{border:1px solid var(--line);border-radius:10px;margin:0 0 10px;padding:12px;background:#fafbfd}
+fieldset{min-width:0;border:1px solid var(--line);border-radius:10px;margin:0 0 10px;padding:12px;background:#fafbfd}
 button{font:500 14px "IBM Plex Sans",sans-serif;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s}
 button:hover{background:#f1f4f9;border-color:#b9c3d3}
 .pri{background:var(--navy2);border-color:var(--navy2);color:#fff}.pri:hover{background:var(--navy);border-color:var(--navy)}
@@ -44,14 +47,19 @@ button:hover{background:#f1f4f9;border-color:#b9c3d3}
 .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--navy2),#2f6fd1);transition:width .3s}
 .tips{margin:6px 0 0;padding-left:18px;color:var(--mut);font-size:13px}
 .tool{display:grid;gap:14px;margin-bottom:14px}
+.tb{display:grid;gap:14px}
+.tt{display:none;width:100%;justify-content:space-between;align-items:center;font-weight:600;background:transparent;border:0;padding:2px 0}
 .cap{font-size:12px;font-weight:600;color:var(--mut);margin-bottom:6px}
 .seg,.sw,.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .seg button[aria-pressed=true]{background:var(--navy2);border-color:var(--navy2);color:#fff}
 .sw .c{width:28px;height:28px;padding:0;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
 .sw .c[aria-pressed=true]{box-shadow:0 0 0 2px var(--navy2)}
 .hint{font-size:12px;color:var(--mut)}
+.zbar{display:none;position:sticky;top:0;z-index:5;align-items:center;justify-content:space-between;gap:8px;padding:8px 2px;background:var(--bg);font-size:13px;color:var(--mut)}
+.zbar div{display:flex;gap:6px}
 .pv{overflow:auto;padding:18px;background:#d3dae5;border-radius:12px}
-.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 18px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s}
+.tabs{display:none}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);max-width:92vw;text-align:center;background:var(--navy);color:#fff;padding:9px 18px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:30}
 .toast.on{opacity:1}
 
 /* ===== Currículo: base ===== */
@@ -122,11 +130,63 @@ button:hover{background:#f1f4f9;border-color:#b9c3d3}
 #cv.t-faixa .it::before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--ac);border:2px solid #fff}
 #cv.t-faixa .two{display:grid;grid-template-columns:1fr 1fr;gap:0 10mm}
 
-@media(max-width:900px){.app{grid-template-columns:1fr}.left{position:static;max-height:none}.nav .act{margin-left:0}}
-@media print{@page{size:A4;margin:0}body{background:#fff}.nav,.left,.tool,.toast{display:none!important}.app{display:block;padding:0}.pv{padding:0;background:none;overflow:visible}#cv{zoom:1!important;box-shadow:none;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+/* ===== Celular e tablet: uma coluna com abas e barra inferior ===== */
+@media(max-width:900px){
+ body{padding-bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+ .app{grid-template-columns:1fr;gap:14px;padding:14px 14px 20px}
+ .left,#pvsec{width:100%;max-width:700px;margin:0 auto}
+ .left{position:static;max-height:none;overflow:visible;padding:0}
+ body[data-tab=prev] .left{display:none}
+ body[data-tab=edit] #pvsec{display:none}
+ .nav .act{margin-left:0}
+ .card{padding:14px}
+ .tool{margin-bottom:8px}
+ .tt{display:flex}
+ .tool:not(.open) .tb{display:none}
+ .zbar{display:flex}
+ .pv{padding:8px;border-radius:10px}
+ .tabs{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(11,31,58,.97);box-shadow:0 -4px 16px rgba(11,31,58,.25)}
+ .tabs button{flex:1;min-height:48px;border-radius:12px;background:transparent;color:#cfd9ea;border:1px solid rgba(255,255,255,.22);font-weight:600;font-size:15px}
+ .tabs button[aria-pressed=true]{background:#fff;color:var(--navy);border-color:#fff}
+ .tabs .pdf{background:#2f6fd1;border-color:#2f6fd1;color:#fff}
+ body.kb .tabs{display:none}
+ body.kb{padding-bottom:20px}
+ .toast{bottom:calc(90px + env(safe-area-inset-bottom,0px))}
+}
+/* Alvos de toque confortáveis e sem zoom automático do iOS nos campos */
+@media(max-width:900px),(pointer:coarse){
+ input,textarea{font-size:16px;padding:11px 12px}
+ button{min-height:44px}
+ .rm{min-height:40px}
+ .sw .c{width:38px;height:38px;min-height:0}
+ input[type=color]{width:52px;height:40px}
+}
+@media(max-width:600px){
+ .nav{gap:10px 12px}
+ .logo{width:36px;height:36px}
+ .brand h1{font-size:18px}
+ .brand p{display:none}
+ .nav .act{flex:1 1 100%;order:3}
+ .nav .act button{flex:1}
+ .seg{display:grid;grid-template-columns:1fr 1fr}
+ .row button{flex:1 1 140px}
+ .hint{flex:1 1 100%}
+ .sh b{font-size:24px}
+}
+
+/* ===== Impressão (sempre por último) ===== */
+@media print{
+ @page{size:A4;margin:0}
+ body,body.kb{background:#fff;padding:0!important}
+ .nav,.left,.tool,.toast,.tabs,.zbar{display:none!important}
+ #pvsec{display:block!important;max-width:none;margin:0}
+ .app{display:block;padding:0}
+ .pv{padding:0;background:none;overflow:visible;border-radius:0}
+ #cv{zoom:1!important;box-shadow:none;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 </style>
 </head>
-<body>
+<body data-tab="edit">
 <header class="nav">
   <div class="logo" aria-hidden="true">GC</div>
   <div class="brand"><h1>GC Perfil</h1><p>Um gerador de currículo profissional. Crie seu próprio perfil.</p></div>
@@ -140,24 +200,33 @@ button:hover{background:#f1f4f9;border-color:#b9c3d3}
     <div class="card" id="score"></div>
     <form id="f" onsubmit="return false" aria-label="Dados do currículo"></form>
   </div>
-  <section>
-    <div class="card tool">
-      <div><div class="cap">Modelo</div><div class="seg" id="tpls"></div></div>
-      <div><div class="cap">Cor de destaque</div><div class="sw" id="sws"></div></div>
-      <div class="row">
-        <button type="button" id="fotob">Adicionar foto</button>
-        <button type="button" id="fotor" hidden>Remover foto</button>
-        <span class="hint">A foto aparece nos modelos Moderno e Faixa.</span>
-      </div>
-      <div class="row">
-        <button type="button" class="pri" id="pdf">Baixar PDF</button>
-        <button type="button" id="clr">Limpar tudo</button>
-        <span class="hint">Na janela de impressão, escolha “Salvar como PDF” e desative “Cabeçalhos e rodapés”.</span>
+  <section id="pvsec">
+    <div class="card tool" id="tool">
+      <button type="button" class="tt" id="tt" aria-expanded="false" aria-controls="tb"><span>Personalizar modelo, cor e foto</span><span aria-hidden="true">▾</span></button>
+      <div class="tb" id="tb">
+        <div><div class="cap">Modelo</div><div class="seg" id="tpls"></div></div>
+        <div><div class="cap">Cor de destaque</div><div class="sw" id="sws"></div></div>
+        <div class="row">
+          <button type="button" id="fotob">Adicionar foto</button>
+          <button type="button" id="fotor" hidden>Remover foto</button>
+          <span class="hint">A foto aparece nos modelos Moderno e Faixa.</span>
+        </div>
+        <div class="row">
+          <button type="button" class="pri" id="pdf">Baixar PDF</button>
+          <button type="button" id="clr">Limpar tudo</button>
+          <span class="hint">Na impressão, escolha “Salvar como PDF” (no celular: Compartilhar ou Imprimir) e desative “Cabeçalhos e rodapés”.</span>
+        </div>
       </div>
     </div>
+    <div class="zbar"><span>Prévia em tamanho A4</span><div><button type="button" id="zm" aria-label="Diminuir a prévia">−</button><button type="button" id="zr">Ajustar</button><button type="button" id="zp" aria-label="Ampliar a prévia">+</button></div></div>
     <div class="pv"><div id="cv"></div></div>
   </section>
 </div>
+<nav class="tabs" aria-label="Navegação">
+  <button type="button" data-tab="edit" aria-pressed="true">Editar</button>
+  <button type="button" data-tab="prev" aria-pressed="false">Prévia</button>
+  <button type="button" class="pdf" id="pdf2">Baixar PDF</button>
+</nav>
 <input type="file" id="impf" accept="application/json,.json" hidden>
 <input type="file" id="fotoin" accept="image/*" hidden>
 <div class="toast" id="toast" role="status"></div>
@@ -193,15 +262,21 @@ const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast("
 let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2600)}
 const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-/* ===== Formulário ===== */
+/* ===== Formulário (atributos pensados para teclado de celular) ===== */
 const card=(n,t,b)=>`<section class="card"><h2><span class="n">${n}</span>${t}</h2>${b}</section>`;
-const inp=(k,l,ph="")=>`<label>${l}<input data-k="${k}" value="${esc(S[k])}" placeholder="${ph}"></label>`;
-const sub=(f,t,v,ph="")=>`<label>${t}<input data-f="${f}" value="${esc(v)}" placeholder="${ph}"></label>`;
+const inp=(k,l,ph="",at="")=>`<label>${l}<input data-k="${k}" value="${esc(S[k])}" placeholder="${ph}" enterkeyhint="next" ${at}></label>`;
+const sub=(f,t,v,ph="",at="")=>`<label>${t}<input data-f="${f}" value="${esc(v)}" placeholder="${ph}" enterkeyhint="next" autocapitalize="sentences" ${at}></label>`;
 function renderForm(){
  $("#f").innerHTML=
- card(1,"Dados pessoais",inp("nome","Nome completo")+inp("cargo","Cargo ou objetivo","Ex.: Desenvolvedor Web Júnior")+inp("email","E-mail")+inp("tel","Telefone")+inp("cidade","Cidade e estado")+inp("link","Link (GitHub, LinkedIn ou portfólio)"))+
- card(2,"Resumo",`<label>Fale de você em 2 a 4 frases<textarea data-k="resumo">${esc(S.resumo)}</textarea></label>`)+
- card(3,"Experiência",S.exp.map((e,i)=>`<fieldset data-l="exp" data-i="${i}">${sub("cargo","Cargo",e.cargo)}${sub("empresa","Empresa",e.empresa)}${sub("periodo","Período",e.periodo,"Ex.: 2023 – 2024")}<label>O que você fez (uma linha por item)<textarea data-f="desc">${esc(e.desc)}</textarea></label><button type="button" class="rm" data-rm="exp:${i}">Remover</button></fieldset>`).join("")+`<button type="button" class="add" data-add="exp">Adicionar experiência</button>`)+
+ card(1,"Dados pessoais",
+  inp("nome","Nome completo","","autocomplete=\"name\" autocapitalize=\"words\"")+
+  inp("cargo","Cargo ou objetivo","Ex.: Desenvolvedor Web Júnior","autocapitalize=\"words\"")+
+  inp("email","E-mail","","type=\"email\" inputmode=\"email\" autocomplete=\"email\" autocapitalize=\"none\" spellcheck=\"false\"")+
+  inp("tel","Telefone","","type=\"tel\" inputmode=\"tel\" autocomplete=\"tel\"")+
+  inp("cidade","Cidade e estado","","autocapitalize=\"words\"")+
+  inp("link","Link (GitHub, LinkedIn ou portfólio)","","inputmode=\"url\" autocapitalize=\"none\" autocorrect=\"off\" spellcheck=\"false\""))+
+ card(2,"Resumo",`<label>Fale de você em 2 a 4 frases<textarea data-k="resumo" autocapitalize="sentences">${esc(S.resumo)}</textarea></label>`)+
+ card(3,"Experiência",S.exp.map((e,i)=>`<fieldset data-l="exp" data-i="${i}">${sub("cargo","Cargo",e.cargo,"","autocapitalize=\"words\"")}${sub("empresa","Empresa",e.empresa)}${sub("periodo","Período",e.periodo,"Ex.: 2023 – 2024")}<label>O que você fez (uma linha por item)<textarea data-f="desc" autocapitalize="sentences">${esc(e.desc)}</textarea></label><button type="button" class="rm" data-rm="exp:${i}">Remover</button></fieldset>`).join("")+`<button type="button" class="add" data-add="exp">Adicionar experiência</button>`)+
  card(4,"Formação",S.edu.map((e,i)=>`<fieldset data-l="edu" data-i="${i}">${sub("curso","Curso",e.curso)}${sub("inst","Instituição",e.inst)}${sub("periodo","Período",e.periodo)}<button type="button" class="rm" data-rm="edu:${i}">Remover</button></fieldset>`).join("")+`<button type="button" class="add" data-add="edu">Adicionar formação</button>`)+
  card(5,"Habilidades e idiomas",inp("skills","Habilidades (separe por vírgula)")+inp("idiomas","Idiomas (separe por vírgula)"));
 }
@@ -243,8 +318,35 @@ function draw(){
  $("#fotob").textContent=S.foto?"Trocar foto":"Adicionar foto";$("#fotor").hidden=!S.foto;
  score();fit();
 }
-function fit(){const w=$(".pv").clientWidth-36;$("#cv").style.zoom=Math.min(1,w/794)}
+
+/* A prévia A4 se ajusta à largura da tela; no celular dá para ampliar (zoom) */
+let mul=1;
+function fit(){
+ const pv=$(".pv"),cs=getComputedStyle(pv),w=pv.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+ if(w<=0)return;
+ $("#cv").style.zoom=Math.min(Math.min(1,w/794)*mul,1.6);
+}
 function refresh(){save();renderForm();syncTool();draw()}
+
+/* ===== Abas (celular) ===== */
+let ys=0;
+function tab(t){
+ const b=document.body;
+ if(b.dataset.tab==="edit")ys=window.scrollY;
+ b.dataset.tab=t;
+ document.querySelectorAll(".tabs [data-tab]").forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.tab===t)));
+ window.scrollTo(0,t==="prev"?0:ys);
+ fit();
+}
+$(".tabs").addEventListener("click",e=>{const t=e.target.closest(".tabs [data-tab]");if(t)tab(t.dataset.tab)});
+$("#tt").onclick=()=>{const o=$("#tool").classList.toggle("open");$("#tt").setAttribute("aria-expanded",String(o))};
+$("#zm").onclick=()=>{mul=Math.max(1,mul/1.25);fit()};
+$("#zp").onclick=()=>{mul=Math.min(3.5,mul*1.25);fit()};
+$("#zr").onclick=()=>{mul=1;fit()};
+/* Esconde a barra inferior enquanto o teclado está aberto */
+const isField="input:not([type=color]):not([type=file]),textarea";
+document.addEventListener("focusin",e=>{if(e.target.matches(isField))document.body.classList.add("kb")});
+document.addEventListener("focusout",()=>setTimeout(()=>{const a=document.activeElement;if(!a||!a.matches(isField))document.body.classList.remove("kb")},120));
 
 /* ===== Eventos ===== */
 $("#f").addEventListener("input",e=>{
@@ -264,7 +366,8 @@ $("#f").addEventListener("click",e=>{
 $("#tpls").addEventListener("click",e=>{const k=e.target.dataset.tpl;if(!k)return;S.tpl=k;save();syncTool();draw()});
 $("#sws").addEventListener("click",e=>{const c=e.target.dataset.cor;if(!c)return;S.cor=c;save();syncTool();draw()});
 $("#sws").addEventListener("input",e=>{if(e.target.id!=="cor")return;S.cor=e.target.value;save();draw()});
-$("#pdf").onclick=()=>window.print();
+const imprimir=()=>window.print();
+$("#pdf").onclick=imprimir;$("#pdf2").onclick=imprimir;
 let oldTitle=document.title;
 window.addEventListener("beforeprint",()=>{oldTitle=document.title;document.title="Currículo - "+(S.nome.trim()||"GC Perfil")});
 window.addEventListener("afterprint",()=>{document.title=oldTitle});
