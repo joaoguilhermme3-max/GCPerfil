@@ -3,40 +3,64 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GC Perfil</title>
+<title>GC Perfil | Gerador de currículo</title>
+<meta name="description" content="Gerador de currículo profissional: preencha, escolha um modelo e baixe em PDF.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#e6ebee;--ink:#16202a;--mut:#5b6872;--line:#cdd5da;--card:#fff;--ok:#0b6e5c;box-sizing:border-box}
+:root{--navy:#0b1f3a;--navy2:#14325c;--bg:#eef1f6;--ink:#0f1b2d;--mut:#5a6779;--line:#d6dce6;--card:#fff;--ring:#3b82f6;box-sizing:border-box}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "IBM Plex Sans",system-ui,sans-serif}
-.top{padding:22px clamp(16px,4vw,40px) 6px}
-.top h1{margin:0;font:700 clamp(24px,4vw,34px)/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em}
-.top p{margin:6px 0 0;color:var(--mut);max-width:60ch}
-.app{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:20px;padding:16px clamp(16px,4vw,40px) 40px;align-items:start}
-#f{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}
-#f h2{font:700 17px "Bricolage Grotesque",sans-serif;margin:22px 0 8px}
-#f h2:first-child{margin-top:0}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
+
+/* ===== Aplicativo ===== */
+.nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:14px clamp(16px,4vw,40px);background:linear-gradient(120deg,var(--navy),var(--navy2));color:#fff}
+.logo{width:40px;height:40px;border-radius:11px;background:#fff;color:var(--navy);display:grid;place-items:center;font:700 16px "Bricolage Grotesque",sans-serif}
+.brand h1{margin:0;font:700 20px/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.01em}
+.brand p{margin:3px 0 0;font-size:13px;color:#b9c7dd}
+.nav .act{margin-left:auto;display:flex;gap:8px}
+.app{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:20px;padding:20px clamp(16px,4vw,40px) 48px;align-items:start}
+.left{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;display:grid;gap:14px;align-content:start;padding:2px}
+#f{display:grid;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:0 1px 2px rgba(11,31,58,.04)}
+.card h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font:700 16px "Bricolage Grotesque",sans-serif}
+.n{width:24px;height:24px;border-radius:50%;background:var(--navy2);color:#fff;font:600 12px "IBM Plex Sans",sans-serif;display:grid;place-items:center}
 label{display:block;font-size:13px;color:var(--mut);margin:0 0 10px}
-input,textarea,select{display:block;width:100%;margin-top:3px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font:inherit;color:var(--ink);background:#fff}
-textarea{resize:vertical;min-height:70px}
-:focus-visible{outline:3px solid #0b6e5c;outline-offset:1px}
-fieldset{border:1px solid var(--line);border-radius:8px;margin:0 0 10px;padding:10px}
-button{font:500 14px "IBM Plex Sans",sans-serif;padding:8px 14px;border-radius:6px;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}
-button:hover{background:#f0f3f5}
-.pri{background:var(--ok);border-color:var(--ok);color:#fff}.pri:hover{background:#09584a}
-.rm{border-color:var(--line);color:#a02c2c;font-size:13px;padding:4px 10px}
-.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:12px}
-.bar label{margin:0;flex:1 1 140px}.bar input[type=color]{padding:2px;height:36px}
-.pv{overflow:auto;padding:16px;background:#cfd7dc;border-radius:10px}
+input,textarea{display:block;width:100%;margin-top:4px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;color:var(--ink);background:#fff}
+input:focus,textarea:focus{border-color:var(--navy2)}
+input[type=color]{padding:2px;height:30px;width:42px;margin:0;border-radius:8px}
+textarea{resize:vertical;min-height:72px}
+fieldset{border:1px solid var(--line);border-radius:10px;margin:0 0 10px;padding:12px;background:#fafbfd}
+button{font:500 14px "IBM Plex Sans",sans-serif;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s}
+button:hover{background:#f1f4f9;border-color:#b9c3d3}
+.pri{background:var(--navy2);border-color:var(--navy2);color:#fff}.pri:hover{background:var(--navy);border-color:var(--navy)}
+.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}.ghost:hover{background:rgba(255,255,255,.14);border-color:#fff}
+.add{width:100%;border-style:dashed;color:var(--navy2)}
+.rm{color:#a02c2c;font-size:13px;padding:4px 10px}
+.sh{display:flex;align-items:baseline;gap:10px}.sh b{font:700 26px "Bricolage Grotesque",sans-serif;color:var(--navy2)}.sh span{color:var(--mut);font-size:13px}
+.meter{height:8px;border-radius:99px;background:#e3e8f0;overflow:hidden;margin:8px 0}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--navy2),#2f6fd1);transition:width .3s}
+.tips{margin:6px 0 0;padding-left:18px;color:var(--mut);font-size:13px}
+.tool{display:grid;gap:14px;margin-bottom:14px}
+.cap{font-size:12px;font-weight:600;color:var(--mut);margin-bottom:6px}
+.seg,.sw,.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.seg button[aria-pressed=true]{background:var(--navy2);border-color:var(--navy2);color:#fff}
+.sw .c{width:28px;height:28px;padding:0;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.sw .c[aria-pressed=true]{box-shadow:0 0 0 2px var(--navy2)}
+.hint{font-size:12px;color:var(--mut)}
+.pv{overflow:auto;padding:18px;background:#d3dae5;border-radius:12px}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 18px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
 
 /* ===== Currículo: base ===== */
-#cv{width:210mm;min-height:297mm;margin:0 auto;background:#fff;color:#1b232b;box-shadow:0 2px 14px rgba(0,0,0,.18);--ac:#0b6e5c;--soft:color-mix(in srgb,var(--ac) 10%,#fff);font:13px/1.5 "IBM Plex Sans",sans-serif;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+#cv{width:210mm;min-height:297mm;margin:0 auto;background:#fff;color:#1b232b;box-shadow:0 4px 20px rgba(11,31,58,.22);--ac:#14325c;--soft:color-mix(in srgb,var(--ac) 10%,#fff);font:13px/1.5 "IBM Plex Sans",sans-serif;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 #cv h1{margin:0;font:700 32px/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.01em}
 #cv h3{display:flex;align-items:center;gap:10px;margin:18px 0 8px;font:700 14px "Bricolage Grotesque",sans-serif;color:var(--ac);break-after:avoid}
 #cv h3::after{content:"";flex:1;height:1px;background:#cdd5da}
 #cv p{margin:0}
+#cv .hd{flex:1}
 #cv .cargo{font-size:15px;margin-top:5px;color:#3d4a55}
 #cv .cts{display:flex;flex-wrap:wrap;gap:3px 0;margin-top:10px}
 #cv header .ct+.ct{border-left:1px solid #b8c0c6;margin-left:12px;padding-left:12px}
@@ -49,9 +73,9 @@ button:hover{background:#f0f3f5}
 #cv ul{margin:4px 0 0;padding-left:17px}#cv li{margin-bottom:2px}#cv li::marker{color:var(--ac)}
 #cv .ch{display:flex;flex-wrap:wrap;gap:5px}
 #cv .ch span{background:var(--soft);border-radius:4px;padding:2px 9px;font-size:12px;font-weight:500}
-#cv section{break-inside:auto}
+#cv .foto{object-fit:cover;border-radius:50%}
 
-/* ===== Clássico ===== */
+/* Clássico */
 #cv.t-classico{padding:18mm 20mm;font-family:"Source Serif 4",Georgia,serif;font-size:13.5px;line-height:1.55}
 #cv.t-classico h1{font-family:"Source Serif 4",Georgia,serif;font-size:34px;letter-spacing:.01em}
 #cv.t-classico header{text-align:center;padding-bottom:14px;border-bottom:3px double var(--ac)}
@@ -62,10 +86,11 @@ button:hover{background:#f0f3f5}
 #cv.t-classico .ch span{background:none;border:1px solid #b8c0c6;border-radius:99px}
 #cv.t-classico .s{font-style:italic;font-weight:400}
 
-/* ===== Moderno (barra lateral) ===== */
+/* Moderno */
 #cv.t-moderno{display:grid;grid-template-columns:34% 1fr}
-#cv.t-moderno aside{background:var(--ac);color:#fff;padding:16mm 8mm}
-#cv.t-moderno .mono{width:24mm;height:24mm;border-radius:50%;border:2px solid rgba(255,255,255,.7);display:grid;place-items:center;font:700 26px "Bricolage Grotesque",sans-serif;margin:0 auto 6mm}
+#cv.t-moderno aside{background:linear-gradient(180deg,var(--ac),color-mix(in srgb,var(--ac) 78%,#000));color:#fff;padding:16mm 8mm}
+#cv.t-moderno .mono{width:28mm;height:28mm;border-radius:50%;border:2px solid rgba(255,255,255,.7);display:grid;place-items:center;font:700 28px "Bricolage Grotesque",sans-serif;margin:0 auto 7mm}
+#cv.t-moderno .foto{width:30mm;height:30mm;display:block;margin:0 auto 7mm;border:3px solid rgba(255,255,255,.75)}
 #cv.t-moderno aside h3{color:#fff;font-size:13px}
 #cv.t-moderno aside h3::after{background:rgba(255,255,255,.4)}
 #cv.t-moderno aside .cts{display:block;margin:0}
@@ -77,71 +102,125 @@ button:hover{background:#f0f3f5}
 #cv.t-moderno main h3::after{display:none}
 #cv.t-moderno main .cargo{color:var(--ac);font-weight:500;margin-bottom:4mm}
 
-/* ===== Compacto (duas colunas) ===== */
+/* Compacto */
 #cv.t-compacto{padding:13mm 14mm;font-size:12px}
 #cv.t-compacto header{border-left:5px solid var(--ac);padding-left:12px;margin-bottom:4mm}
 #cv.t-compacto h1{font-size:28px}
+#cv.t-compacto h3{margin-top:12px;font-size:13px}
 #cv.t-compacto .cols{display:grid;grid-template-columns:1fr 58mm;gap:8mm}
 #cv.t-compacto .side{background:var(--soft);border-radius:6px;padding:2mm 5mm 5mm;align-self:start}
 #cv.t-compacto .side h3::after{background:var(--ac);opacity:.35}
-#cv.t-compacto h3{margin-top:12px;font-size:13px}
 
-/* ===== Faixa (cabeçalho em destaque + linha do tempo) ===== */
-#cv.t-faixa header{background:var(--ac);color:#fff;padding:15mm 18mm 11mm}
+/* Faixa */
+#cv.t-faixa header{display:flex;align-items:center;justify-content:space-between;gap:10mm;background:linear-gradient(120deg,var(--ac),color-mix(in srgb,var(--ac) 78%,#000));color:#fff;padding:15mm 18mm 11mm}
 #cv.t-faixa .cargo,#cv.t-faixa .ct{color:#fff}
 #cv.t-faixa .cargo{opacity:.92}
 #cv.t-faixa header .ct+.ct{border-color:rgba(255,255,255,.45)}
+#cv.t-faixa .foto{width:30mm;height:30mm;flex:none;border:3px solid rgba(255,255,255,.8)}
 #cv.t-faixa .bd{padding:3mm 18mm 14mm}
 #cv.t-faixa .it{position:relative;border-left:2px solid color-mix(in srgb,var(--ac) 30%,#fff);padding-left:15px;margin-left:4px}
 #cv.t-faixa .it::before{content:"";position:absolute;left:-7px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--ac);border:2px solid #fff}
 #cv.t-faixa .two{display:grid;grid-template-columns:1fr 1fr;gap:0 10mm}
 
-@media(max-width:900px){.app{grid-template-columns:1fr}#f{position:static;max-height:none}}
-@media print{@page{size:A4;margin:0}body{background:#fff}.top,#f,.bar{display:none!important}.app{display:block;padding:0}.pv{padding:0;background:none;overflow:visible}#cv{zoom:1!important;box-shadow:none;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media(max-width:900px){.app{grid-template-columns:1fr}.left{position:static;max-height:none}.nav .act{margin-left:0}}
+@media print{@page{size:A4;margin:0}body{background:#fff}.nav,.left,.tool,.toast{display:none!important}.app{display:block;padding:0}.pv{padding:0;background:none;overflow:visible}#cv{zoom:1!important;box-shadow:none;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
 <body>
-<header class="top">
-  <h1>GC Perfil</h1>
-  <p>Um gerador de currículo profissional, crie seu próprio perfil.</p>
+<header class="nav">
+  <div class="logo" aria-hidden="true">GC</div>
+  <div class="brand"><h1>GC Perfil</h1><p>Um gerador de currículo profissional. Crie seu próprio perfil.</p></div>
+  <div class="act">
+    <button type="button" class="ghost" id="imp">Importar dados</button>
+    <button type="button" class="ghost" id="exp">Exportar dados</button>
+  </div>
 </header>
 <div class="app">
-  <form id="f" onsubmit="return false" aria-label="Dados do currículo"></form>
+  <div class="left">
+    <div class="card" id="score"></div>
+    <form id="f" onsubmit="return false" aria-label="Dados do currículo"></form>
+  </div>
   <section>
-    <div class="bar">
-      <label>Modelo
-        <select id="tpl"><option value="classico">Clássico</option><option value="moderno">Moderno</option><option value="compacto">Compacto</option><option value="faixa">Faixa</option></select>
-      </label>
-      <label>Cor de destaque<input type="color" id="cor"></label>
-      <button type="button" class="pri" id="pdf">Baixar PDF</button>
-      <button type="button" id="clr">Limpar tudo</button>
+    <div class="card tool">
+      <div><div class="cap">Modelo</div><div class="seg" id="tpls"></div></div>
+      <div><div class="cap">Cor de destaque</div><div class="sw" id="sws"></div></div>
+      <div class="row">
+        <button type="button" id="fotob">Adicionar foto</button>
+        <button type="button" id="fotor" hidden>Remover foto</button>
+        <span class="hint">A foto aparece nos modelos Moderno e Faixa.</span>
+      </div>
+      <div class="row">
+        <button type="button" class="pri" id="pdf">Baixar PDF</button>
+        <button type="button" id="clr">Limpar tudo</button>
+        <span class="hint">Na janela de impressão, escolha “Salvar como PDF” e desative “Cabeçalhos e rodapés”.</span>
+      </div>
     </div>
     <div class="pv"><div id="cv"></div></div>
   </section>
 </div>
+<input type="file" id="impf" accept="application/json,.json" hidden>
+<input type="file" id="fotoin" accept="image/*" hidden>
+<div class="toast" id="toast" role="status"></div>
+
 <script>
 const $=s=>document.querySelector(s);
+const NAVY="#14325c",KEY="cv-gerador";
+const TPLS=[["classico","Clássico"],["moderno","Moderno"],["compacto","Compacto"],["faixa","Faixa"]];
+const CORES=[["Azul marinho",NAVY],["Azul royal","#1d5fd1"],["Verde","#0b6e5c"],["Grafite","#2b3440"],["Bordô","#7a1f36"]];
+const TXT=["nome","cargo","email","tel","cidade","link","resumo","skills","idiomas"];
+const blankExp=()=>({cargo:"",empresa:"",periodo:"",desc:""}),blankEdu=()=>({curso:"",inst:"",periodo:""});
 const SAMPLE={nome:"João Guilhermme",cargo:"Desenvolvedor Web Júnior",email:"joao@email.com",tel:"(88) 99999-0000",cidade:"Fortaleza, CE",link:"github.com/joao",
 resumo:"Estudante de Análise e Desenvolvimento de Sistemas, com projetos em HTML, CSS, JavaScript e PHP. Busco a primeira oportunidade na área de TI para aprender em equipe e entregar sistemas úteis.",
 exp:[{cargo:"Auxiliar administrativa",empresa:"Loja Exemplo",periodo:"2024 – atual",desc:"Controle de estoque e atendimento ao cliente\nOrganização de planilhas de vendas"}],
 edu:[{curso:"Tecnólogo em Análise e Desenvolvimento de Sistemas",inst:"UNINASSAU",periodo:"2024 – 2026"}],
-skills:"HTML, CSS, JavaScript, PHP, MySQL, Git, Excel",idiomas:"Português (nativo), Inglês (básico)",tpl:"classico",cor:"#0b6e5c"};
-let S;
-try{S=JSON.parse(localStorage.getItem("cv-gerador"))}catch(e){}
-if(!S||!Array.isArray(S.exp))S=structuredClone(SAMPLE);
-const save=()=>{try{localStorage.setItem("cv-gerador",JSON.stringify(S))}catch(e){}};
+skills:"HTML, CSS, JavaScript, PHP, MySQL, Git, Excel",idiomas:"Português (nativo), Inglês (básico)",tpl:"classico",cor:NAVY,foto:""};
+
+/* Valida e normaliza qualquer dado vindo do localStorage ou de arquivo importado */
+function clean(o){
+ o=o&&typeof o==="object"?o:{};
+ const str=v=>typeof v==="string"?v.slice(0,3000):"",list=(a,mk)=>(Array.isArray(a)?a:[]).slice(0,20).map(e=>{e=e||{};const b=mk();for(const k in b)b[k]=str(e[k]);return b});
+ const out={};TXT.forEach(k=>out[k]=str(o[k]));
+ out.exp=list(o.exp,blankExp);if(!out.exp.length)out.exp=[blankExp()];
+ out.edu=list(o.edu,blankEdu);if(!out.edu.length)out.edu=[blankEdu()];
+ out.tpl=TPLS.some(t=>t[0]===o.tpl)?o.tpl:"classico";
+ out.cor=/^#[0-9a-f]{6}$/i.test(o.cor)?o.cor:NAVY;
+ out.foto=/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/.test(o.foto||"")?o.foto:"";
+ return out;
+}
+let raw=null;try{raw=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+let S=clean(raw||SAMPLE);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast("Não foi possível salvar neste navegador.")}};
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2600)}
 const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
+/* ===== Formulário ===== */
+const card=(n,t,b)=>`<section class="card"><h2><span class="n">${n}</span>${t}</h2>${b}</section>`;
 const inp=(k,l,ph="")=>`<label>${l}<input data-k="${k}" value="${esc(S[k])}" placeholder="${ph}"></label>`;
-const area=(k,l)=>`<label>${l}<textarea data-k="${k}">${esc(S[k])}</textarea></label>`;
-const sub=(l,i,f,t,v,ph)=>`<label>${t}<input data-f="${f}" value="${esc(v)}" placeholder="${ph||""}"></label>`;
+const sub=(f,t,v,ph="")=>`<label>${t}<input data-f="${f}" value="${esc(v)}" placeholder="${ph}"></label>`;
 function renderForm(){
- $("#f").innerHTML=`<h2>Dados pessoais</h2>${inp("nome","Nome completo")}${inp("cargo","Cargo ou objetivo","Ex.: Desenvolvedor Web Júnior")}${inp("email","E-mail")}${inp("tel","Telefone")}${inp("cidade","Cidade e estado")}${inp("link","Link (GitHub, LinkedIn ou portfólio)")}
- <h2>Resumo</h2>${area("resumo","Fale de você em 2 ou 3 frases")}
- <h2>Experiência</h2>${S.exp.map((e,i)=>`<fieldset data-l="exp" data-i="${i}">${sub("exp",i,"cargo","Cargo",e.cargo)}${sub("exp",i,"empresa","Empresa",e.empresa)}${sub("exp",i,"periodo","Período",e.periodo,"Ex.: 2023 – 2024")}<label>O que você fez (uma linha por item)<textarea data-f="desc">${esc(e.desc)}</textarea></label><button type="button" class="rm" data-rm="exp:${i}">Remover</button></fieldset>`).join("")}<button type="button" data-add="exp">Adicionar experiência</button>
- <h2>Formação</h2>${S.edu.map((e,i)=>`<fieldset data-l="edu" data-i="${i}">${sub("edu",i,"curso","Curso",e.curso)}${sub("edu",i,"inst","Instituição",e.inst)}${sub("edu",i,"periodo","Período",e.periodo)}<button type="button" class="rm" data-rm="edu:${i}">Remover</button></fieldset>`).join("")}<button type="button" data-add="edu">Adicionar formação</button>
- <h2>Habilidades e idiomas</h2>${inp("skills","Habilidades (separe por vírgula)")}${inp("idiomas","Idiomas (separe por vírgula)")}`;
+ $("#f").innerHTML=
+ card(1,"Dados pessoais",inp("nome","Nome completo")+inp("cargo","Cargo ou objetivo","Ex.: Desenvolvedor Web Júnior")+inp("email","E-mail")+inp("tel","Telefone")+inp("cidade","Cidade e estado")+inp("link","Link (GitHub, LinkedIn ou portfólio)"))+
+ card(2,"Resumo",`<label>Fale de você em 2 a 4 frases<textarea data-k="resumo">${esc(S.resumo)}</textarea></label>`)+
+ card(3,"Experiência",S.exp.map((e,i)=>`<fieldset data-l="exp" data-i="${i}">${sub("cargo","Cargo",e.cargo)}${sub("empresa","Empresa",e.empresa)}${sub("periodo","Período",e.periodo,"Ex.: 2023 – 2024")}<label>O que você fez (uma linha por item)<textarea data-f="desc">${esc(e.desc)}</textarea></label><button type="button" class="rm" data-rm="exp:${i}">Remover</button></fieldset>`).join("")+`<button type="button" class="add" data-add="exp">Adicionar experiência</button>`)+
+ card(4,"Formação",S.edu.map((e,i)=>`<fieldset data-l="edu" data-i="${i}">${sub("curso","Curso",e.curso)}${sub("inst","Instituição",e.inst)}${sub("periodo","Período",e.periodo)}<button type="button" class="rm" data-rm="edu:${i}">Remover</button></fieldset>`).join("")+`<button type="button" class="add" data-add="edu">Adicionar formação</button>`)+
+ card(5,"Habilidades e idiomas",inp("skills","Habilidades (separe por vírgula)")+inp("idiomas","Idiomas (separe por vírgula)"));
 }
+function syncTool(){
+ $("#tpls").innerHTML=TPLS.map(([k,l])=>`<button type="button" data-tpl="${k}" aria-pressed="${S.tpl===k}">${l}</button>`).join("");
+ $("#sws").innerHTML=CORES.map(([n,c])=>`<button type="button" class="c" data-cor="${c}" style="background:${c}" aria-label="${n}" title="${n}" aria-pressed="${S.cor.toLowerCase()===c}"></button>`).join("")+`<input type="color" id="cor" value="${S.cor}" aria-label="Cor personalizada" title="Cor personalizada">`;
+}
+
+/* ===== Completude ===== */
+function score(){
+ const n=v=>(v||"").trim(),cnt=t=>n(t).split(",").filter(x=>n(x)).length;
+ const c=[[n(S.nome),10,"Informe seu nome completo"],[n(S.cargo),10,"Diga o cargo ou objetivo profissional"],[n(S.email),10,"Adicione um e-mail de contato"],[n(S.tel),10,"Adicione um telefone com DDD"],
+  [n(S.resumo).length>=120,15,"Escreva um resumo de 2 a 4 frases"],[S.exp.some(e=>n(e.cargo)&&n(e.desc)),20,"Descreva uma experiência com o que você fez"],
+  [S.edu.some(e=>n(e.curso)),10,"Inclua sua formação"],[cnt(S.skills)>=3,10,"Liste ao menos 3 habilidades"],[cnt(S.idiomas)>=1,5,"Informe seus idiomas"]];
+ const p=c.reduce((a,x)=>a+(x[0]?x[1]:0),0),tips=c.filter(x=>!x[0]).slice(0,3);
+ $("#score").innerHTML=`<div class="sh"><b>${p}%</b><span>${p>=100?"Currículo completo":"de completude do currículo"}</span></div><div class="meter" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100"><i style="width:${p}%"></i></div>${tips.length?`<ul class="tips">${tips.map(t=>`<li>${t[2]}</li>`).join("")}</ul>`:""}`;
+}
+
+/* ===== Currículo ===== */
 const ul=t=>{const l=String(t||"").split("\n").map(x=>x.trim()).filter(Boolean);return l.length?`<ul>${l.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""};
 const chips=t=>{const l=String(t||"").split(",").map(x=>x.trim()).filter(Boolean);return l.length?`<div class="ch">${l.map(x=>`<span>${esc(x)}</span>`).join("")}</div>`:""};
 const sec=(t,b)=>b?`<section><h3>${t}</h3>${b}</section>`:"";
@@ -150,44 +229,83 @@ function draw(){
  const ct=[S.email,S.tel,S.cidade,S.link].filter(Boolean).map(x=>`<div class="ct">${esc(x)}</div>`).join("");
  const exp=S.exp.filter(e=>e.cargo||e.empresa).map(e=>`<div class="it"><div class="r"><b>${esc(e.cargo)}</b><span>${esc(e.periodo)}</span></div><div class="s">${esc(e.empresa)}</div>${ul(e.desc)}</div>`).join("");
  const edu=S.edu.filter(e=>e.curso||e.inst).map(e=>`<div class="it"><div class="r"><b>${esc(e.curso)}</b><span>${esc(e.periodo)}</span></div><div class="s">${esc(e.inst)}</div></div>`).join("");
- const pn=(S.nome||"").trim().split(/\s+/).filter(Boolean);
+ const pn=S.nome.trim().split(/\s+/).filter(Boolean);
  const mono=pn.length?(pn[0][0]+(pn.length>1?pn[pn.length-1][0]:"")).toUpperCase():"?";
- const head=c=>`<header><h1>${esc(S.nome)||"Seu nome"}</h1><div class="cargo">${esc(S.cargo)}</div>${c&&ct?`<div class="cts">${ct}</div>`:""}</header>`;
+ const foto=S.foto?`<img class="foto" src="${S.foto}" alt="Foto de ${esc(S.nome)}">`:"";
+ const head=(c,f)=>`<header><div class="hd"><h1>${esc(S.nome)||"Seu nome"}</h1><div class="cargo">${esc(S.cargo)}</div>${c&&ct?`<div class="cts">${ct}</div>`:""}</div>${f?foto:""}</header>`;
  const resumo=S.resumo?sec("Resumo",`<p>${esc(S.resumo)}</p>`):"";
  const ex=sec("Experiência",exp),ed=sec("Formação",edu),sk=sec("Habilidades",chips(S.skills)),id=sec("Idiomas",chips(S.idiomas));
  cv.className="t-"+T;cv.style.setProperty("--ac",S.cor);
- if(T==="moderno")cv.innerHTML=`<aside><div class="mono">${esc(mono)}</div>${ct?sec("Contato",`<div class="cts">${ct}</div>`):""}${sk}${id}</aside><main>${head(0)}${resumo}${ex}${ed}</main>`;
- else if(T==="compacto")cv.innerHTML=`${head(1)}<div class="cols"><div>${resumo}${ex}</div><div class="side">${ed}${sk}${id}</div></div>`;
- else if(T==="faixa")cv.innerHTML=`${head(1)}<div class="bd">${resumo}${ex}${ed}<div class="two">${sk}${id}</div></div>`;
- else cv.innerHTML=`${head(1)}${resumo}${ex}${ed}${sk}${id}`;
- fit();
+ if(T==="moderno")cv.innerHTML=`<aside>${foto||`<div class="mono">${esc(mono)}</div>`}${ct?sec("Contato",`<div class="cts">${ct}</div>`):""}${sk}${id}</aside><main>${head(0,0)}${resumo}${ex}${ed}</main>`;
+ else if(T==="compacto")cv.innerHTML=`${head(1,0)}<div class="cols"><div>${resumo}${ex}</div><div class="side">${ed}${sk}${id}</div></div>`;
+ else if(T==="faixa")cv.innerHTML=`${head(1,1)}<div class="bd">${resumo}${ex}${ed}<div class="two">${sk}${id}</div></div>`;
+ else cv.innerHTML=`${head(1,0)}${resumo}${ex}${ed}${sk}${id}`;
+ $("#fotob").textContent=S.foto?"Trocar foto":"Adicionar foto";$("#fotor").hidden=!S.foto;
+ score();fit();
 }
-function fit(){const w=$(".pv").clientWidth-32;$("#cv").style.zoom=Math.min(1,w/794)}
+function fit(){const w=$(".pv").clientWidth-36;$("#cv").style.zoom=Math.min(1,w/794)}
+function refresh(){save();renderForm();syncTool();draw()}
 
+/* ===== Eventos ===== */
 $("#f").addEventListener("input",e=>{
  const t=e.target;
  if(t.dataset.k)S[t.dataset.k]=t.value;
  else if(t.dataset.f){const fs=t.closest("fieldset");S[fs.dataset.l][fs.dataset.i][t.dataset.f]=t.value}
+ else return;
  save();draw();
 });
 $("#f").addEventListener("click",e=>{
  const a=e.target.dataset.add,r=e.target.dataset.rm;
- if(a){S[a].push(a==="exp"?{cargo:"",empresa:"",periodo:"",desc:""}:{curso:"",inst:"",periodo:""})}
- else if(r){const[l,i]=r.split(":");S[l].splice(+i,1)}
+ if(a)S[a].push(a==="exp"?blankExp():blankEdu());
+ else if(r){const[l,i]=r.split(":");S[l].splice(+i,1);if(!S[l].length)S[l].push(l==="exp"?blankExp():blankEdu())}
  else return;
- save();renderForm();draw();
+ refresh();
 });
-$("#tpl").onchange=e=>{S.tpl=e.target.value;save();draw()};
-$("#cor").oninput=e=>{S.cor=e.target.value;save();draw()};
+$("#tpls").addEventListener("click",e=>{const k=e.target.dataset.tpl;if(!k)return;S.tpl=k;save();syncTool();draw()});
+$("#sws").addEventListener("click",e=>{const c=e.target.dataset.cor;if(!c)return;S.cor=c;save();syncTool();draw()});
+$("#sws").addEventListener("input",e=>{if(e.target.id!=="cor")return;S.cor=e.target.value;save();draw()});
 $("#pdf").onclick=()=>window.print();
+let oldTitle=document.title;
+window.addEventListener("beforeprint",()=>{oldTitle=document.title;document.title="Currículo - "+(S.nome.trim()||"GC Perfil")});
+window.addEventListener("afterprint",()=>{document.title=oldTitle});
 $("#clr").onclick=()=>{
- if(!confirm("Apagar todos os dados do currículo?"))return;
- S={nome:"",cargo:"",email:"",tel:"",cidade:"",link:"",resumo:"",exp:[{cargo:"",empresa:"",periodo:"",desc:""}],edu:[{curso:"",inst:"",periodo:""}],skills:"",idiomas:"",tpl:S.tpl,cor:S.cor};
- save();renderForm();draw();
+ if(!confirm("Apagar todos os dados do currículo? Exporte um backup antes, se quiser guardar."))return;
+ S=clean({tpl:S.tpl,cor:S.cor});refresh();
 };
+
+/* Backup em JSON */
+$("#exp").onclick=()=>{
+ const slug=(S.nome||"curriculo").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"curriculo";
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:"application/json"}));
+ a.download=`gc-perfil-${slug}.json`;a.click();
+ setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast("Dados exportados");
+};
+$("#imp").onclick=()=>$("#impf").click();
+$("#impf").onchange=e=>{
+ const f=e.target.files[0];e.target.value="";if(!f)return;
+ f.text().then(t=>{S=clean(JSON.parse(t));refresh();toast("Dados importados")}).catch(()=>toast("Arquivo inválido"));
+};
+
+/* Foto: recorte quadrado e redução para 320 px (JPEG) */
+$("#fotob").onclick=()=>$("#fotoin").click();
+$("#fotor").onclick=()=>{S.foto="";save();draw()};
+$("#fotoin").onchange=e=>{
+ const f=e.target.files[0];e.target.value="";
+ if(!f||!f.type.startsWith("image/"))return;
+ const url=URL.createObjectURL(f),im=new Image();
+ im.onload=()=>{
+  const s=320,m=Math.min(im.width,im.height),c=document.createElement("canvas");
+  c.width=c.height=s;
+  c.getContext("2d").drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,s,s);
+  URL.revokeObjectURL(url);S.foto=c.toDataURL("image/jpeg",.85);save();draw();
+ };
+ im.onerror=()=>{URL.revokeObjectURL(url);toast("Não foi possível ler a imagem")};
+ im.src=url;
+};
+
 window.addEventListener("resize",fit);
-$("#tpl").value=S.tpl;$("#cor").value=S.cor;
-renderForm();draw();
+renderForm();syncTool();draw();
 </script>
 </body>
 </html>
